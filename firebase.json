@@ -1,0 +1,7 @@
+{
+  "apphosting": {
+    "backendId": "magpie",
+    "rootDir": ".",
+    "ignore": ["node_modules", ".git", ".next", "data", "media", "*.tar.gz", "test-results", "playwright-report", "firebase-debug.log", "firebase-debug.*.log", ".env", ".env.*"]
+  }
+}

@@ -1,0 +1,127 @@
+/* Admin add-ons for The Magpie. Uses Payload's theme variables so it follows light/dark. */
+.mg {
+  --mg-gold: #8A5E0E;
+  --mg-gold-hover: #734C08;
+  --mg-sage: #455838;
+  --mg-rose: #9A4834;
+  color: var(--theme-text);
+}
+.mg h1 { font-size: 1.9rem; margin: 0 0 4px; }
+.mg .mg-sub { color: var(--theme-elevation-600); margin: 0 0 18px; }
+.mg-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+.mg-btn {
+  min-height: 44px; padding: 8px 16px; border-radius: 10px;
+  border: 1px solid var(--theme-elevation-200); background: var(--theme-elevation-50);
+  color: var(--theme-text); font: inherit; font-weight: 700; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  touch-action: manipulation;
+  transition: border-color 140ms ease, background-color 140ms ease, transform 90ms ease-out;
+}
+.mg-btn:hover:not([disabled]) { border-color: var(--mg-gold); }
+.mg-btn:active:not([disabled]) { transform: scale(0.97); }
+.mg-btn:focus-visible, .mg-day-head:focus-visible, .mg-slot button:focus-visible {
+  outline: 3px solid var(--mg-gold); outline-offset: 2px;
+}
+.mg-btn.primary { background: var(--mg-gold); border-color: var(--mg-gold); color: #FFFDF8; }
+.mg-btn.primary:hover:not([disabled]) { background: var(--mg-gold-hover); border-color: var(--mg-gold-hover); }
+.mg-btn.danger { border-color: var(--mg-rose); color: var(--mg-rose); background: transparent; }
+.mg-btn.danger-solid { background: var(--mg-rose); border-color: var(--mg-rose); color: #FFFDF8; }
+.mg-btn.on { background: var(--mg-sage); border-color: var(--mg-sage); color: #FFFDF8; }
+.mg-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.mg-btn.sm { min-height: 38px; padding: 6px 12px; font-size: 0.86rem; }
+.mg-note { padding: 10px 14px; border-radius: 10px; background: var(--theme-elevation-50); border: 1px dashed var(--theme-elevation-250); font-size: 0.92rem; }
+.mg-error { padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--mg-rose); color: var(--mg-rose); font-weight: 600; margin-bottom: 12px; }
+.mg-ok { color: var(--mg-sage); font-weight: 700; }
+.mg-confirm {
+  margin-top: 12px; padding: 12px 14px; border-radius: 10px;
+  border: 1.5px solid var(--mg-rose); background: color-mix(in srgb, var(--mg-rose) 8%, var(--theme-elevation-0));
+  display: grid; gap: 10px;
+}
+.mg-confirm p { margin: 0; font-weight: 600; }
+
+/* Dashboard cards */
+.mg-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.mg-card {
+  border: 1px solid var(--theme-elevation-150); border-radius: 14px; padding: 16px 18px;
+  background: var(--theme-elevation-0); text-decoration: none; color: inherit; display: block;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+a.mg-card:hover { border-color: var(--mg-gold); transform: translateY(-2px); }
+.mg-card .k { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--theme-elevation-600); }
+.mg-card .v { font-size: 2rem; font-weight: 700; line-height: 1.15; margin-top: 4px; font-variant-numeric: lining-nums tabular-nums; }
+.mg-card .d { font-size: 0.88rem; color: var(--theme-elevation-600); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+
+/* Kanban */
+.mg-board { display: grid; grid-template-columns: repeat(4, minmax(240px, 1fr)); gap: 12px; align-items: start; overflow-x: auto; padding-bottom: 12px; }
+@media (max-width: 900px) { .mg-board { grid-template-columns: repeat(4, 84vw); scroll-snap-type: x mandatory; } .mg-col { scroll-snap-align: start; } }
+.mg-col { background: var(--theme-elevation-50); border: 1px solid var(--theme-elevation-150); border-radius: 14px; padding: 10px; min-height: 240px; transition: border-color 0.15s, background 0.15s; }
+.mg-col.over { border-color: var(--mg-gold); background: var(--theme-elevation-100); }
+.mg-col-head { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 6px 10px; }
+.mg-col-head strong { font-size: 1.05rem; }
+.mg-count { background: var(--theme-elevation-200); border-radius: 999px; padding: 2px 10px; font-size: 0.82rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.mg-order {
+  background: var(--theme-elevation-0); border: 1px solid var(--theme-elevation-150);
+  border-left: 5px solid var(--mg-gold); border-radius: 12px; padding: 12px; margin-bottom: 10px;
+  cursor: grab; touch-action: manipulation;
+}
+.mg-order.dragging { opacity: 0.35; }
+.mg-order.s-PENDING { border-left-color: var(--theme-elevation-300); }
+.mg-order.s-READY { border-left-color: var(--mg-sage); }
+.mg-order.s-COMPLETED { border-left-color: var(--theme-elevation-400); opacity: 0.85; }
+.mg-order.fresh { animation: mg-flash 1.2s ease-out 3; }
+@keyframes mg-flash { 0% { box-shadow: 0 0 0 0 rgba(138,94,14,0.6); } 100% { box-shadow: 0 0 0 14px rgba(138,94,14,0); } }
+.mg-order .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.mg-order .who { font-weight: 700; font-size: 1.02rem; overflow-wrap: anywhere; }
+.mg-order .when { font-weight: 700; color: var(--mg-gold); white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+.mg-order .meta { font-size: 0.86rem; color: var(--theme-elevation-600); }
+.mg-order ul { margin: 8px 0; padding: 0; list-style: none; font-size: 0.94rem; }
+.mg-order .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; font-variant-numeric: lining-nums tabular-nums; }
+.mg-order .notes {
+  font-size: 0.88rem; background: var(--theme-elevation-100); border-radius: 8px;
+  padding: 6px 9px; margin: 6px 0 0; display: flex; align-items: flex-start; gap: 6px; overflow-wrap: anywhere;
+}
+.mg-empty { color: var(--theme-elevation-500); text-align: center; padding: 24px 8px; font-size: 0.9rem; }
+.mg-modal-back { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(3px); }
+.mg-modal { background: var(--theme-bg); border: 1px solid var(--theme-elevation-200); border-radius: 16px; padding: 22px; width: min(540px, 100%); max-height: 90vh; overflow: auto; }
+.mg-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.mg-ticket { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.45; border: 1px dashed var(--theme-elevation-300); border-radius: 8px; padding: 12px; margin: 12px 0; white-space: pre-wrap; }
+.mg-move-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+
+/* Week editor */
+.mg-week { display: grid; grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+@media (max-width: 1000px) { .mg-week { grid-template-columns: 1fr; } }
+.mg-side { border: 1px solid var(--theme-elevation-150); border-radius: 14px; padding: 12px; background: var(--theme-elevation-50); position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+@media (max-width: 1000px) { .mg-side { position: static; max-height: 46vh; order: 2; } }
+.mg-side input, .mg-side select { width: 100%; min-height: 44px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--theme-elevation-200); background: var(--theme-input-bg, var(--theme-elevation-0)); color: var(--theme-text); font: inherit; margin-bottom: 8px; }
+.mg-dish { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; text-align: left; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--theme-elevation-150); background: var(--theme-elevation-0); color: var(--theme-text); font: inherit; margin-bottom: 6px; cursor: grab; touch-action: manipulation; min-height: 44px; }
+.mg-dish:hover { border-color: var(--mg-gold); }
+.mg-dish small { color: var(--theme-elevation-600); white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+.mg-dish.hidden-dish { opacity: 0.58; }
+.mg-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.mg-day { border: 2px solid var(--theme-elevation-150); border-radius: 14px; padding: 12px; background: var(--theme-elevation-0); min-height: 220px; transition: border-color 0.15s; }
+.mg-day.active { border-color: var(--mg-gold); }
+.mg-day.over { border-color: var(--mg-sage); background: var(--theme-elevation-50); }
+.mg-day-head {
+  width: 100%; text-align: left; background: transparent; border: none; padding: 0; margin: 0 0 10px;
+  color: inherit; font: inherit; cursor: pointer; touch-action: manipulation; display: block;
+}
+.mg-day-head h3 { margin: 0 0 2px; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: baseline; }
+.mg-day-head h3 small { font-size: 0.76rem; font-weight: 700; color: var(--mg-gold); letter-spacing: 0.06em; }
+.mg-day-head .hint { font-size: 0.82rem; color: var(--theme-elevation-500); margin: 0; }
+.mg-slot { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 8px 6px 8px 10px; border-radius: 10px; background: var(--theme-elevation-100); margin-bottom: 6px; font-size: 0.93rem; }
+.mg-slot button { width: 40px; height: 40px; border-radius: 8px; border: none; background: transparent; color: var(--theme-text); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none; touch-action: manipulation; }
+.mg-slot button:hover { background: var(--theme-elevation-200); }
+.mg-tabs { display: inline-flex; border: 1px solid var(--theme-elevation-200); border-radius: 12px; overflow: hidden; }
+.mg-tabs button { min-height: 44px; padding: 8px 16px; border: none; background: transparent; color: var(--theme-text); font: inherit; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.mg-tabs button[aria-pressed="true"] { background: var(--mg-gold); color: #FFFDF8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-order.fresh { animation: none; }
+  .mg-btn, .mg-card { transition: none; }
+}
+
+@media print {
+  body * { visibility: hidden !important; }
+  .mg-ticket, .mg-ticket * { visibility: visible !important; }
+  .mg-ticket { position: fixed; left: 0; top: 0; width: 72mm; border: none; margin: 0; padding: 0; color: #000; background: #fff; font-size: 12px; }
+}

@@ -1,0 +1,42 @@
+# Firebase App Hosting configuration (https://firebase.google.com/docs/app-hosting/configure)
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 1024
+
+env:
+  # Public URL of the site, no trailing slash. Change it when a custom domain is connected.
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://magpie--themagpiebistro.us-east4.hosted.app
+
+  # Database: Cloud SQL for PostgreSQL, reached through the Cloud SQL connector (no IP allow-list).
+  - variable: CLOUD_SQL_INSTANCE
+    value: themagpiebistro:us-east4:magpie-db
+  - variable: DB_USER
+    value: magpie
+  - variable: DB_NAME
+    value: magpie
+  - variable: DB_PASSWORD
+    secret: magpie-db-password
+
+  - variable: PAYLOAD_SECRET
+    secret: magpie-payload-secret
+
+  # Photos uploaded in the admin are stored in this Cloud Storage bucket.
+  - variable: GCS_BUCKET
+    value: themagpiebistro-media
+
+  - variable: BISTRO_NOTIFICATION_EMAIL
+    value: themagpiecupcakery@gmail.com
+
+  # Add when the accounts exist (create each secret first: firebase apphosting:secrets:set <name>):
+  # - variable: STRIPE_SECRET_KEY
+  #   secret: stripe-secret-key
+  # - variable: STRIPE_WEBHOOK_SECRET
+  #   secret: stripe-webhook-secret
+  # - variable: RESEND_API_KEY
+  #   secret: resend-api-key
+  # - variable: EMAIL_FROM
+  #   value: The Magpie Bistro <orders@yourdomain.com>
